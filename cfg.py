@@ -1,6 +1,6 @@
 import os
 
-train_task_id = '3T256'
+train_task_id = '3T736'
 initial_epoch = 0
 epoch_num = 24
 lr = 1e-3
@@ -15,7 +15,7 @@ lambda_side_vertex_coord_loss = 1.0
 total_img = 10000
 validation_split_ratio = 0.1
 max_train_img_size = int(train_task_id[-3:])
-max_predict_img_size = int(train_task_id[-3:])  # 2400
+max_predict_img_size = int(train_task_id[-3:])
 assert max_train_img_size in [256, 384, 512, 640, 736], \
     'max_train_img_size must in [256, 384, 512, 640, 736]'
 if max_train_img_size == 256:

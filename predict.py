@@ -35,7 +35,7 @@ def cut_text_line(geo, scale_ratio_w, scale_ratio_h, im_array, img_path, s):
 def predict(east_detect, img_path, pixel_threshold, quiet=False):
     img = image.load_img(img_path)
     d_wight, d_height = resize_image(img, cfg.max_predict_img_size)
-    img = img.resize((d_wight, d_height), Image.NEAREST).convert('RGB')
+    img = img.resize((d_wight, d_height), Image.ANTIALIAS).convert('RGB')
     img = image.img_to_array(img)
     img = preprocess_input(img, mode='tf')
     x = np.expand_dims(img, axis=0)
@@ -75,7 +75,7 @@ def predict(east_detect, img_path, pixel_threshold, quiet=False):
         for score, geo, s in zip(quad_scores, quad_after_nms,
                                  range(len(quad_scores))):
             if np.amin(score) > 0:
-                quad_draw.line([tuple(geo[0]),
+                quad_draw.line([tuple(geo[0]), # https://huoyijie.github.io/ 这里介绍的应该是有问题，如果是尾部的话，应该是先存的右下角再存的右上角
                                 tuple(geo[1]),
                                 tuple(geo[2]),
                                 tuple(geo[3]),
